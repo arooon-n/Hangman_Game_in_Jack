@@ -1,0 +1,289 @@
+class Hangman
+{
+   field Array wordlist;
+   field String solution;
+   field String correctGuesses;
+   field boolean win;
+   constructor Hangman new(int x, int score)
+   {
+      var int i;
+      var int answerLength;
+      let i = 0;
+      // Initialize the wordlist array
+      let wordlist = Array.new(100);  // Assume 10 words for this example
+
+      // Populate the wordlist with words
+      
+
+      // Populate the wordlist with words
+      let wordlist[0] = "APPLE";
+      let wordlist[1] = "BRIDGE";
+      let wordlist[2] = "CAT";
+      let wordlist[3] = "DANCE";
+      let wordlist[4] = "EAGLE";
+      let wordlist[5] = "FLOWER";
+      let wordlist[6] = "GALAXY";
+      let wordlist[7] = "HOUSE";
+      let wordlist[8] = "ISLAND";
+      let wordlist[9] = "JUNGLE";
+      let wordlist[10] = "KITE";
+      let wordlist[11] = "LAMP";
+      let wordlist[12] = "MOUNTAIN";
+      let wordlist[13] = "NOTEBOOK";
+      let wordlist[14] = "OCEAN";
+      let wordlist[15] = "PIANO";
+      let wordlist[16] = "QUEEN";
+      let wordlist[17] = "ROBOT";
+      let wordlist[18] = "STAR";
+      let wordlist[19] = "TREE";
+      let wordlist[20] = "UMBRELLA";
+      let wordlist[21] = "VIOLIN";
+      let wordlist[22] = "WINDOW";
+      let wordlist[23] = "XYLOPHONE";
+      let wordlist[24] = "YARN";
+      let wordlist[25] = "ZEBRA";
+      let wordlist[26] = "ASTRONAUT";
+      let wordlist[27] = "BICYCLE";
+      let wordlist[28] = "CAMERA";
+      let wordlist[29] = "DINOSAUR";
+      let wordlist[30] = "ELEPHANT";
+      let wordlist[31] = "FOREST";
+      let wordlist[32] = "GARDEN";
+      let wordlist[33] = "HELICOPTER";
+      let wordlist[34] = "IGLOO";
+      let wordlist[35] = "JELLYFISH";
+      let wordlist[36] = "KANGAROO";
+      let wordlist[37] = "LIBRARY";
+      let wordlist[38] = "MOON";
+      let wordlist[39] = "NECKLACE";
+      let wordlist[40] = "OCTOPUS";
+      let wordlist[41] = "PIRATE";
+      let wordlist[42] = "QUILT";
+      let wordlist[43] = "RAINBOW";
+      let wordlist[44] = "SPACESHIP";
+      let wordlist[45] = "TELESCOPE";
+      let wordlist[46] = "UNICORN";
+      let wordlist[47] = "VOLCANO";
+      let wordlist[48] = "WHALE";
+      let wordlist[49] = "ELEMENT";  
+      let wordlist[50] = "YOGURT";
+      let wordlist[51] = "ZEPHYR";
+      let wordlist[52] = "ADVENTURE";
+      let wordlist[53] = "BALLOON";
+      let wordlist[54] = "CASTLE";
+      let wordlist[55] = "DRAGON";
+      let wordlist[56] = "EXPLORER";
+      let wordlist[57] = "FAIRY";
+      let wordlist[58] = "GORILLA";
+      let wordlist[59] = "HERO";
+      let wordlist[60] = "ICEBERG";
+      let wordlist[61] = "JEWEL";
+      let wordlist[62] = "KNIGHT";
+      let wordlist[63] = "LANTERN";
+      let wordlist[64] = "MAGICIAN";
+      let wordlist[65] = "NINJA";
+      let wordlist[66] = "OASIS";
+      let wordlist[67] = "PUMPKIN";
+      let wordlist[68] = "QUEST";
+      let wordlist[69] = "RIVER";
+      let wordlist[70] = "COMPUTING";  
+      let wordlist[71] = "TREASURE";
+      let wordlist[72] = "UNIVERSE";
+      let wordlist[73] = "VICTORY";
+      let wordlist[74] = "WIZARD";
+      let wordlist[75] = "X-RAY";
+      let wordlist[76] = "YAWN";
+      let wordlist[77] = "ZIPPER";
+      let wordlist[78] = "AQUARIUM";
+      let wordlist[79] = "BOAT";
+      let wordlist[80] = "CIRCUS";
+      let wordlist[81] = "DESERT";
+      let wordlist[82] = "ENGINE";
+      let wordlist[83] = "FESTIVAL";
+      let wordlist[84] = "HOTEL";
+      let wordlist[85] = "KOALA";
+      let wordlist[86] = "LIGHTHOUSE";
+      let wordlist[87] = "MERMAID";
+      let wordlist[88] = "PYRAMID";
+      let wordlist[89] = "ROCKET";
+      let wordlist[90] = "SHIP";
+      let wordlist[91] = "TUNNEL";
+      let wordlist[92] = "VALLEY";
+      let wordlist[93] = "WATERFALL";
+      let wordlist[94] = "YACHT";
+      let wordlist[95] = "SLAVE";
+      let wordlist[96] = "DOOM";
+      let wordlist[97] = "POWER";
+      let wordlist[98] = "SLAVE";
+      let wordlist[99] = "MOVIE";
+ 
+      let solution = wordlist[x];
+      let correctGuesses = String.new(solution.length());
+      while(i < (solution.length()))
+      {
+         let correctGuesses = correctGuesses.appendChar(219);
+         let i = i+1; 
+      }
+      do Output.printString("HANGMAN");
+      do Output.println();
+      do Output.printString("Score: ");
+      do Output.printInt(score);
+      do Output.println();
+      do Output.printString("Guess: ");
+      do Output.println();
+      return this;
+   }
+
+      
+   //start and run the game.
+   method void run()
+   {
+      var boolean endGame;
+      var int line, wrongGuesses;
+      var char guess;
+       
+      let wrongGuesses = 0;
+      let line = 3; 
+      let endGame = false;
+      do drawHangPost();
+      
+      while(~(endGame))
+      {
+         do Output.printString(correctGuesses);
+         do Output.moveCursor(line,15);
+         let line = line +1;
+         let guess = Keyboard.readChar();
+         do Output.println();
+         if(~(isCorrectGuess(guess)))
+         {
+            if(wrongGuesses = 0)
+            {
+               do drawHead();
+            }
+            if(wrongGuesses = 1)
+            {
+               do drawTorso();
+            }
+            if(wrongGuesses = 2)
+            {
+               do drawRightArm();
+            }
+            if(wrongGuesses = 3)
+            {
+               do drawLeftArm();
+            }
+            if(wrongGuesses = 4)
+            {
+               do drawRightLeg();
+            }
+            if(wrongGuesses = 5)
+            {
+               do drawLeftLeg();
+               do Output.printString("GAME OVER!");
+               let endGame = true;
+               let win = false;
+            }
+            let wrongGuesses = wrongGuesses +1; 
+         }
+         if(isWin())
+         {
+            do Output.printString(solution);
+            do Output.println();
+            do Output.printString("You win!");
+            let endGame = true;
+            let win = true;
+         }
+      }
+      return;
+   }
+   
+   //Check winning condition
+   method boolean isWin()
+   {
+      var int i;
+      let i = 0;
+      while(i < correctGuesses.length())
+      {
+         if(correctGuesses.charAt(i) = 219)
+         {
+            return 0; 
+         }
+         let i = i+1;
+      }
+      return -1; 
+   }
+   
+   //Verify whole word as the game progresses
+   method boolean isCorrectGuess(char guess)
+   { 
+      var int i;
+      var int idx;
+      let idx = 0;
+      let i =0;
+      while(i < solution.length())
+      {
+         if(guess = solution.charAt(i))
+         {
+            do correctGuesses.setCharAt(i, guess);
+            let idx = -1;
+            
+         }
+         let i=i+1;
+      }
+      return idx;
+   }
+   
+   //Default game setup for Hangman
+   method void drawHangPost()
+   { 
+      do Screen.setColor(true);
+      do Screen.drawRectangle(350, 200, 450, 220);
+      do Screen.drawRectangle(395,50,405,200);
+      do Screen.drawRectangle(300,40,405,50);
+      do Screen.drawRectangle(300,40,310,70);
+      return;
+   }
+   
+   //Main drawing functions
+   method void drawHead()
+   {
+      do Screen.drawCircle(305,90,20);
+      return;
+   }
+   method void drawTorso()
+   {
+      do Screen.drawLine(305,110, 305, 160);
+      return;
+   }
+   method void drawRightArm()
+   {
+      do Screen.drawLine(305,135, 320, 120);
+      return;
+   }
+
+   method void drawLeftArm()
+   {
+      do Screen.drawLine(305,135, 290, 120);
+      return;
+   }
+   method void drawRightLeg()
+   {
+      do Screen.drawLine(305,160, 325, 180);
+      return;
+   }
+   method void drawLeftLeg()
+   {
+      do Screen.drawLine(305,160, 285, 180);
+      return;
+   }
+   //Deallocate Object in Memory.
+   method void dispose()
+   {
+     do Memory.deAlloc(this);
+     return;
+   }
+
+   method boolean getresult(){
+      return win;
+   }
+}

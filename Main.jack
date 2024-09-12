@@ -1,0 +1,82 @@
+
+class Main
+{
+   function void main()
+   {
+      var Hangman game;
+      var boolean playAgain,win;
+      var char response;
+      var int i, score;
+      // Initialize playAgain to true so the loop runs at least once
+      let playAgain = true;
+      let i = 0;
+      let score = 0;
+
+      //random
+      
+
+      while(playAgain)
+      {
+         // Initialize the game object
+         let game = Hangman.new(i,score);
+         do game.run();  // Run the Hangman game
+         let win = game.getresult();        
+         do game.dispose(); // Clean up the game
+
+
+         // Prompt the user to play again
+         do Output.println();
+         do Output.printString("Play again? (press y to play again): ");
+         do Output.println();
+         do Output.printString("Press any other key to quit: ");
+         let response = Keyboard.readChar();  // Read user input
+         // Determine if the user wants to play again
+         
+         do Screen.clearScreen();       // Clear the screen
+         do Output.moveCursor(0,0);
+         let i = i+1;
+         
+         if(win)
+         {
+            let score = score +1;
+         }
+         
+         if(i = 100)
+         {
+            let playAgain = false;
+            // Move cursor to row 8, column 16 and print "CONGRADULATIONS!!"
+            do Output.moveCursor(8, 24);
+            do Output.printString("CONGRADULATIONS!!");
+            do Output.println();
+            
+            // Move cursor to row 10, column 18 and print "Game finished"
+            do Output.moveCursor(10, 24);
+            do Output.printString("Game finished");
+            do Output.println();
+            
+            // Move cursor to row 10, column 20 and print "Your score: "
+            do Output.moveCursor(12, 24);
+            do Output.printString("Your score: ");
+            
+            // Print the score (assuming score is an integer variable)
+            do Output.printInt(score);
+            do Output.println();
+            return;
+         }
+         if(~(response = 89))
+         {
+            let playAgain = false;
+            do Output.moveCursor(8, 24);
+            do Output.printString("YOU QUIT");
+            do Output.println();
+
+            do Output.moveCursor(10, 24);
+            do Output.printString("Your score: ");
+            do Output.printInt(score);
+            do Output.println();
+         }
+
+      }
+      return;
+   }
+}
